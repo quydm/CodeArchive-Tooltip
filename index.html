@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Tootip</title>
+		<style type="text/css" >
+			body img{width:700px;height:500px;}
+			#tooltip{position:absolute;width:200px;background:#ace1af;color:#808000;height:30px;display:none;}
+			#tooltip h4{font-size:12px;text-align:center;}
+		</style>
+		<script type="text/javascript">
+			document.write("<div id=\"tooltip\" ></div>");
+			// Hiện tooltip
+			function showTooltip(source){
+				var obj = document.getElementById("tooltip");
+				var text = "<h4>" + source + "</h4>";
+				obj.innerHTML = text;
+				var img = document.getElementById("img");
+				obj.style.top = getCursorPosition(event).y - 10 + "px";
+				obj.style.left = getCursorPosition(event).x + 10 + "px";
+				obj.style.display = "block";
+				obj.style.visibility = "visible";
+			}
+			
+			// Ẩn tooltip
+			function hideTip(){
+				var obj = document.getElementById("tooltip");
+				obj.style.visibility = "hidden";
+			}
+			
+			// Lấy vị trí hiện tại của con trỏ
+			function getCursorPosition(e) {
+				e = e || window.event;
+				var cursor = {x:0, y:0};
+				if (e.pageX || e.pageY) {
+					cursor.x = e.pageX;
+					cursor.y = e.pageY;
+				}else {
+					var de = document.documentElement;
+					var b = document.body;
+					cursor.x = e.clientX + (de.scrollLeft || b.scrollLeft) - (de.clientLeft || 0);
+					cursor.y = e.clientY + (de.scrollTop || b.scrollTop) - (de.clientTop || 0);
+				}
+				return cursor;
+			}
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li><a href="#" onmousemove="showTooltip(this.innerHTML)" onmouseout="hideTip()" >Mo cua phong thuy dep</a></li>
+			<li><a href="#" onmousemove="showTooltip(this.innerHTML)" onmouseout="hideTip()" >phong thuy</a></li>
+			<li><a href="#" onmousemove="showTooltip(this.innerHTML)" onmouseout="hideTip()" >Cua so</a></li>
+			<li><a href="#" onmousemove="showTooltip(this.innerHTML)" onmouseout="hideTip()" >San pham moi</a></li>
+		</ul>
+	</body>
+</html>
